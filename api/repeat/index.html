@@ -247,6 +247,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../../3-einmix-layer/" class="md-nav__link">
+      EinMix: universal toolkit for advanced MLP architectures
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="../../pytorch-examples.html" class="md-nav__link">
       Pytorch Examples
     </a>
@@ -450,7 +462,7 @@ This operation includes functionality of repeat, tile, broadcast functions.</p>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">repeat</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="s1">'h w -&gt; (repeat h) w'</span><span class="p">,</span> <span class="n">repeat</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">shape</span>
 <span class="p">(</span><span class="mi">60</span><span class="p">,</span> <span class="mi">40</span><span class="p">)</span>
 
-<span class="c1"># repeat image 3 times along width</span>
+<span class="c1"># repeat image 2 time along height and 3 times along width</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">repeat</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="s1">'h w -&gt; h (repeat w)'</span><span class="p">,</span> <span class="n">repeat</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">shape</span>
 <span class="p">(</span><span class="mi">30</span><span class="p">,</span> <span class="mi">120</span><span class="p">)</span>
 
@@ -543,7 +555,7 @@ list of tensors is also accepted, those should be of the same type and shape</p>
 <span class="sd">    &gt;&gt;&gt; repeat(image, 'h w -&gt; (repeat h) w', repeat=2).shape</span>
 <span class="sd">    (60, 40)</span>
 
-<span class="sd">    # repeat image 3 times along width</span>
+<span class="sd">    # repeat image 2 time along height and 3 times along width</span>
 <span class="sd">    &gt;&gt;&gt; repeat(image, 'h w -&gt; h (repeat w)', repeat=3).shape</span>
 <span class="sd">    (30, 120)</span>
 
