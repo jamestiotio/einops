@@ -1,50 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url>
-     <loc>https://arogozhnikov.github.io/einops/</loc>
+     <loc>https://einops.rocks/</loc>
      <lastmod>2021-09-21</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://arogozhnikov.github.io/einops/1-einops-basics/</loc>
+     <loc>https://einops.rocks/1-einops-basics/</loc>
      <lastmod>2021-09-21</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://arogozhnikov.github.io/einops/2-einops-for-deep-learning/</loc>
+     <loc>https://einops.rocks/2-einops-for-deep-learning/</loc>
      <lastmod>2021-09-21</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://arogozhnikov.github.io/einops/3-einmix-layer/</loc>
+     <loc>https://einops.rocks/3-einmix-layer/</loc>
      <lastmod>2021-09-21</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://arogozhnikov.github.io/einops/pytorch-examples.html</loc>
+     <loc>https://einops.rocks/pytorch-examples.html</loc>
      <lastmod>2021-09-21</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://arogozhnikov.github.io/einops/api/asnumpy/</loc>
+     <loc>https://einops.rocks/api/asnumpy/</loc>
      <lastmod>2021-09-21</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://arogozhnikov.github.io/einops/api/parse_shape/</loc>
+     <loc>https://einops.rocks/api/parse_shape/</loc>
      <lastmod>2021-09-21</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://arogozhnikov.github.io/einops/api/rearrange/</loc>
+     <loc>https://einops.rocks/api/rearrange/</loc>
      <lastmod>2021-09-21</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://arogozhnikov.github.io/einops/api/reduce/</loc>
+     <loc>https://einops.rocks/api/reduce/</loc>
      <lastmod>2021-09-21</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://arogozhnikov.github.io/einops/api/repeat/</loc>
+     <loc>https://einops.rocks/api/repeat/</loc>
      <lastmod>2021-09-21</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://arogozhnikov.github.io/einops/pages/testimonials/</loc>
+     <loc>https://einops.rocks/pages/testimonials/</loc>
      <lastmod>2021-09-21</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://arogozhnikov.github.io/einops/pages/projects/</loc>
+     <loc>https://einops.rocks/pages/projects/</loc>
      <lastmod>2021-09-21</lastmod>
      <changefreq>daily</changefreq>
     </url>
