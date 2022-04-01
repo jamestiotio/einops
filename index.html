@@ -333,6 +333,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#citing-einops" class="md-nav__link">
+    Citing einops 
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#contributing" class="md-nav__link">
     Contributing 
   </a>
@@ -670,6 +677,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#citing-einops" class="md-nav__link">
+    Citing einops 
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#contributing" class="md-nav__link">
     Contributing 
   </a>
@@ -721,8 +735,10 @@
 Supports numpy, pytorch, tensorflow, jax, and <a href="#supported-frameworks">others</a>.</p>
 <h2 id="recent-updates">Recent updates:</h2>
 <ul>
+<li><a href="https://openreview.net/pdf?id=oapKSVM2bcj">Einops paper</a> is accepted for oral presentation at ICLR 2022</li>
+<li>oneflow backend added</li>
 <li>torch.jit.script is supported for pytorch layers</li>
-<li>powerful EinMix added to einops. <a href="https://github.com/arogozhnikov/einops/blob/master/docs/3-einmix-layer.ipynb">Einmix tutorial notebook</a> </li>
+<li>powerful EinMix layer added to einops. <a href="https://github.com/arogozhnikov/einops/blob/master/docs/3-einmix-layer.ipynb">Einmix tutorial notebook</a> </li>
 </ul>
 <!--<div align="center">
   <img src="http://arogozhnikov.github.io/images/einops/einops_logo_350x350.png" 
@@ -739,6 +755,7 @@ Supports numpy, pytorch, tensorflow, jax, and <a href="#supported-frameworks">ot
 <p>Slowly but surely, einops is seeping in to every nook and cranny of my code. If you find yourself shuffling around bazillion dimensional tensors, this might change your life
 <a href="https://twitter.com/nasim_rahaman/status/1216022614755463169">Nasim Rahaman, MILA (Montreal)</a></p>
 </blockquote>
+<p><a href="https://einops.rocks/pages/testimonials/">More testimonials</a></p>
 <h2 id="contents">Contents</h2>
 <ul>
 <li><a href="#Installation">Installation</a></li>
@@ -932,7 +949,21 @@ those are all defined in a uniform way. </p>
 <li><a href="https://gluon.mxnet.io/">gluon</a></li>
 <li><a href="https://www.tensorflow.org/guide/keras">tf.keras</a></li>
 <li><a href="https://mxnet.apache.org/">mxnet</a> (experimental)</li>
+<li><a href="https://github.com/Oneflow-Inc/oneflow">oneflow</a> (experimental)</li>
 </ul>
+<h2 id="citing-einops">Citing einops <a name="Contributing"></a></h2>
+<p>Please use the following bibtex record</p>
+<div class="codehilite"><pre><span></span><code><span class="nv">@inproceedings</span><span class="err">{</span><span class="w"></span>
+<span class="n">rogozhnikov2022einops</span><span class="p">,</span><span class="w"></span>
+<span class="n">title</span><span class="o">=</span><span class="err">{</span><span class="nl">Einops</span><span class="p">:</span><span class="w"> </span><span class="n">Clear</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">Reliable</span><span class="w"> </span><span class="n">Tensor</span><span class="w"> </span><span class="n">Manipulations</span><span class="w"> </span><span class="k">with</span><span class="w"> </span><span class="n">Einstein</span><span class="o">-</span><span class="ow">like</span><span class="w"> </span><span class="n">Notation</span><span class="err">}</span><span class="p">,</span><span class="w"></span>
+<span class="n">author</span><span class="o">=</span><span class="err">{</span><span class="n">Alex</span><span class="w"> </span><span class="n">Rogozhnikov</span><span class="err">}</span><span class="p">,</span><span class="w"></span>
+<span class="n">booktitle</span><span class="o">=</span><span class="err">{</span><span class="n">International</span><span class="w"> </span><span class="n">Conference</span><span class="w"> </span><span class="k">on</span><span class="w"> </span><span class="n">Learning</span><span class="w"> </span><span class="n">Representations</span><span class="err">}</span><span class="p">,</span><span class="w"></span>
+<span class="nf">year</span><span class="o">=</span><span class="err">{</span><span class="mi">2022</span><span class="err">}</span><span class="p">,</span><span class="w"></span>
+<span class="n">url</span><span class="o">=</span><span class="err">{</span><span class="nl">https</span><span class="p">:</span><span class="o">//</span><span class="n">openreview</span><span class="p">.</span><span class="n">net</span><span class="o">/</span><span class="n">forum</span><span class="vm">?</span><span class="n">id</span><span class="o">=</span><span class="n">oapKSVM2bcj</span><span class="err">}</span><span class="w"></span>
+<span class="err">}</span><span class="w"></span>
+</code></pre></div>
+
+<p>Link to paper at openreview: https://openreview.net/pdf?id=oapKSVM2bcj. </p>
 <h2 id="contributing">Contributing <a name="Contributing"></a></h2>
 <p>Best ways to contribute are</p>
 <ul>

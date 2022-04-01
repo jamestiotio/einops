@@ -515,7 +515,7 @@ Find more examples in einops tutorial.</p>
 <tbody>
 <tr>
 <td><code>tensor</code></td>
-<td><code></code></td>
+<td><code>~Tensor</code></td>
 <td>
 <p>tensor of any supported library (e.g. numpy.ndarray, tensorflow, pytorch, mxnet.ndarray).
 list of tensors is also accepted, those should be of the same type and shape</p>
@@ -550,7 +550,7 @@ list of tensors is also accepted, those should be of the same type and shape</p>
 </thead>
 <tbody>
 <tr>
-<td><code></code></td>
+<td><code>~Tensor</code></td>
 <td>
 <p>Tensor of the same type as input. If possible, a view to the original tensor is returned.</p>
 </td>
@@ -560,7 +560,7 @@ list of tensors is also accepted, those should be of the same type and shape</p>
 <details class="quote">
           <summary>Source code in <code>einops/einops.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">repeat</span><span class="p">(</span><span class="n">tensor</span><span class="p">,</span> <span class="n">pattern</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">**</span><span class="n">axes_lengths</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">repeat</span><span class="p">(</span><span class="n">tensor</span><span class="p">:</span> <span class="n">Tensor</span><span class="p">,</span> <span class="n">pattern</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">**</span><span class="n">axes_lengths</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tensor</span><span class="p">:</span>
     <span class="sd">"""</span>
 <span class="sd">    einops.repeat allows reordering elements and repeating them in arbitrary combinations.</span>
 <span class="sd">    This operation includes functionality of repeat, tile, broadcast functions.</span>
