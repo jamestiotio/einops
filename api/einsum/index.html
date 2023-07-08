@@ -741,14 +741,12 @@ pattern: string, einsum pattern, with commas
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">tensors_and_pattern</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-            <span class="s2">&quot;`einops.einsum` takes at minimum two arguments: the tensors (at least one),&quot;</span>
-            <span class="s2">&quot; followed by the pattern.&quot;</span>
+            <span class="s2">&quot;`einops.einsum` takes at minimum two arguments: the tensors (at least one), followed by the pattern.&quot;</span>
         <span class="p">)</span>
     <span class="n">pattern</span> <span class="o">=</span> <span class="n">tensors_and_pattern</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">pattern</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-            <span class="s2">&quot;The last argument passed to `einops.einsum` must be a string,&quot;</span>
-            <span class="s2">&quot; representing the einsum pattern.&quot;</span>
+            <span class="s2">&quot;The last argument passed to `einops.einsum` must be a string, representing the einsum pattern.&quot;</span>
         <span class="p">)</span>
     <span class="n">tensors</span> <span class="o">=</span> <span class="n">tensors_and_pattern</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
     <span class="n">pattern</span> <span class="o">=</span> <span class="n">_compactify_pattern_for_einsum</span><span class="p">(</span><span class="n">pattern</span><span class="p">)</span>

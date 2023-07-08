@@ -2040,10 +2040,10 @@ from utils import guess</div>
                 </div>
             </clipboard-copy>
         </div>
-            <div class="highlight-ipynb hl-python"><pre><span></span><span class="c1"># select one from &#39;chainer&#39;, &#39;gluon&#39;, &#39;tensorflow&#39;, &#39;pytorch&#39; </span>
+            <div class="highlight-ipynb hl-python"><pre><span></span><span class="c1"># select one from &#39;chainer&#39;, &#39;tensorflow&#39;, &#39;pytorch&#39; </span>
 <span class="n">flavour</span> <span class="o">=</span> <span class="s1">&#39;pytorch&#39;</span>
 </pre></div>
-<div id="cell-4" class="clipboard-copy-txt"># select one from 'chainer', 'gluon', 'tensorflow', 'pytorch' 
+<div id="cell-4" class="clipboard-copy-txt"># select one from 'chainer', 'tensorflow', 'pytorch' 
 flavour = 'pytorch'</div>
     
         </div>
@@ -2084,15 +2084,10 @@ flavour = 'pytorch'</div>
     <span class="kn">import</span> <span class="nn">torch</span>
     <span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
     <span class="n">x</span><span class="o">.</span><span class="n">requires_grad</span> <span class="o">=</span> <span class="kc">True</span>
-<span class="k">elif</span> <span class="n">flavour</span> <span class="o">==</span> <span class="s1">&#39;chainer&#39;</span><span class="p">:</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="k">assert</span> <span class="n">flavour</span> <span class="o">==</span> <span class="s1">&#39;chainer&#39;</span>
     <span class="kn">import</span> <span class="nn">chainer</span>
     <span class="n">x</span> <span class="o">=</span> <span class="n">chainer</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-<span class="k">else</span><span class="p">:</span>
-    <span class="k">assert</span> <span class="n">flavour</span> <span class="o">==</span> <span class="s1">&#39;gluon&#39;</span>
-    <span class="kn">import</span> <span class="nn">mxnet</span> <span class="k">as</span> <span class="nn">mx</span>
-    <span class="n">mx</span><span class="o">.</span><span class="n">autograd</span><span class="o">.</span><span class="n">set_recording</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
-    <span class="n">x</span> <span class="o">=</span> <span class="n">mx</span><span class="o">.</span><span class="n">nd</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">x</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
-    <span class="n">x</span><span class="o">.</span><span class="n">attach_grad</span><span class="p">()</span>
 </pre></div>
 <div id="cell-5" class="clipboard-copy-txt">print('selected {} backend'.format(flavour))
 if flavour == 'tensorflow':
@@ -2104,15 +2099,10 @@ elif flavour == 'pytorch':
     import torch
     x = torch.from_numpy(x)
     x.requires_grad = True
-elif flavour == 'chainer':
-    import chainer
-    x = chainer.Variable(x)
 else:
-    assert flavour == 'gluon'
-    import mxnet as mx
-    mx.autograd.set_recording(True)
-    x = mx.nd.array(x, dtype=x.dtype)
-    x.attach_grad()</div>
+    assert flavour == 'chainer'
+    import chainer
+    x = chainer.Variable(x)</div>
     
         </div>
     </div>
@@ -4115,10 +4105,10 @@ assert y.shape == x.shape</div>
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h2 id="layers">Layers<a class="anchor-link" href="#layers">&#182;</a></h2><p>For frameworks that prefer operating with layers, layers are available.</p>
 <p>You'll need to import a proper one depending on your backend:</p>
-<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">einops.layers.chainer</span> <span class="kn">import</span> <span class="n">Rearrange</span><span class="p">,</span> <span class="n">Reduce</span>
-<span class="kn">from</span> <span class="nn">einops.layers.gluon</span> <span class="kn">import</span> <span class="n">Rearrange</span><span class="p">,</span> <span class="n">Reduce</span>
-<span class="kn">from</span> <span class="nn">einops.layers.keras</span> <span class="kn">import</span> <span class="n">Rearrange</span><span class="p">,</span> <span class="n">Reduce</span>
-<span class="kn">from</span> <span class="nn">einops.layers.torch</span> <span class="kn">import</span> <span class="n">Rearrange</span><span class="p">,</span> <span class="n">Reduce</span>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">einops.layers.torch</span> <span class="kn">import</span> <span class="n">Rearrange</span><span class="p">,</span> <span class="n">Reduce</span>
+<span class="kn">from</span> <span class="nn">einops.layers.flax</span> <span class="kn">import</span> <span class="n">Rearrange</span><span class="p">,</span> <span class="n">Reduce</span>
+<span class="kn">from</span> <span class="nn">einops.layers.tensorflow</span> <span class="kn">import</span> <span class="n">Rearrange</span><span class="p">,</span> <span class="n">Reduce</span>
+<span class="kn">from</span> <span class="nn">einops.layers.chainer</span> <span class="kn">import</span> <span class="n">Rearrange</span><span class="p">,</span> <span class="n">Reduce</span>
 </pre></div>
 <p><code>Einops</code> layers are identical to operations, and have same parameters. <br />
 (for the exception of first argument, which should be passed during call)</p>

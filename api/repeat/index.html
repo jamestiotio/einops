@@ -634,7 +634,7 @@ Find more examples in einops tutorial.</p>
   <tbody>
       <tr>
         <td><code>tensor</code></td>
-        <td><code>~Tensor</code></td>
+        <td><code>Union[~Tensor, List[~Tensor]]</code></td>
         <td><p>tensor of any supported library (e.g. numpy.ndarray, tensorflow, pytorch).
 list of tensors is also accepted, those should be of the same type and shape</p></td>
         <td><em>required</em></td>
@@ -670,7 +670,7 @@ list of tensors is also accepted, those should be of the same type and shape</p>
 </table>
         <details class="quote">
           <summary>Source code in <code>einops/einops.py</code></summary>
-          <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">repeat</span><span class="p">(</span><span class="n">tensor</span><span class="p">:</span> <span class="n">Tensor</span><span class="p">,</span> <span class="n">pattern</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">**</span><span class="n">axes_lengths</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tensor</span><span class="p">:</span>
+          <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">repeat</span><span class="p">(</span><span class="n">tensor</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">Tensor</span><span class="p">]],</span> <span class="n">pattern</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">**</span><span class="n">axes_lengths</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tensor</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    einops.repeat allows reordering elements and repeating them in arbitrary combinations.</span>
 <span class="sd">    This operation includes functionality of repeat, tile, broadcast functions.</span>
@@ -717,7 +717,7 @@ list of tensors is also accepted, those should be of the same type and shape</p>
 <span class="sd">        Tensor of the same type as input. If possible, a view to the original tensor is returned.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="n">reduce</span><span class="p">(</span><span class="n">tensor</span><span class="p">,</span> <span class="n">pattern</span><span class="p">,</span> <span class="n">reduction</span><span class="o">=</span><span class="s1">&#39;repeat&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">axes_lengths</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">reduce</span><span class="p">(</span><span class="n">tensor</span><span class="p">,</span> <span class="n">pattern</span><span class="p">,</span> <span class="n">reduction</span><span class="o">=</span><span class="s2">&quot;repeat&quot;</span><span class="p">,</span> <span class="o">**</span><span class="n">axes_lengths</span><span class="p">)</span>
 </code></pre></div>
         </details>
     </div>

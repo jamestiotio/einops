@@ -637,7 +637,7 @@
   <tbody>
       <tr>
         <td><code>tensor</code></td>
-        <td><code>~Tensor</code></td>
+        <td><code>Union[~Tensor, List[~Tensor]]</code></td>
         <td><p>tensor: tensor of any supported library (e.g. numpy.ndarray, tensorflow, pytorch).
 list of tensors is also accepted, those should be of the same type and shape</p></td>
         <td><em>required</em></td>
@@ -681,7 +681,7 @@ This allows using various reductions, examples: np.max, tf.reduce_logsumexp, tor
 </table>
         <details class="quote">
           <summary>Source code in <code>einops/einops.py</code></summary>
-          <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">reduce</span><span class="p">(</span><span class="n">tensor</span><span class="p">:</span> <span class="n">Tensor</span><span class="p">,</span> <span class="n">pattern</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">reduction</span><span class="p">:</span> <span class="n">Reduction</span><span class="p">,</span> <span class="o">**</span><span class="n">axes_lengths</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tensor</span><span class="p">:</span>
+          <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">reduce</span><span class="p">(</span><span class="n">tensor</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">Tensor</span><span class="p">]],</span> <span class="n">pattern</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">reduction</span><span class="p">:</span> <span class="n">Reduction</span><span class="p">,</span> <span class="o">**</span><span class="n">axes_lengths</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tensor</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    einops.reduce provides combination of reordering and reduction using reader-friendly notation.</span>
 
@@ -734,17 +734,28 @@ This allows using various reductions, examples: np.max, tf.reduce_logsumexp, tor
 <span class="sd">        tensor of the same type as input</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">try</span><span class="p">:</span>
-        <span class="n">hashable_axes_lengths</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">axes_lengths</span><span class="o">.</span><span class="n">items</span><span class="p">()))</span>
-        <span class="n">recipe</span> <span class="o">=</span> <span class="n">_prepare_transformation_recipe</span><span class="p">(</span><span class="n">pattern</span><span class="p">,</span> <span class="n">reduction</span><span class="p">,</span> <span class="n">axes_lengths</span><span class="o">=</span><span class="n">hashable_axes_lengths</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">_apply_recipe</span><span class="p">(</span><span class="n">recipe</span><span class="p">,</span> <span class="n">tensor</span><span class="p">,</span> <span class="n">reduction_type</span><span class="o">=</span><span class="n">reduction</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">tensor</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">tensor</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Rearrange/Reduce/Repeat can&#39;t be applied to an empty list&quot;</span><span class="p">)</span>
+            <span class="n">backend</span> <span class="o">=</span> <span class="n">get_backend</span><span class="p">(</span><span class="n">tensor</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+            <span class="n">tensor</span> <span class="o">=</span> <span class="n">backend</span><span class="o">.</span><span class="n">stack_on_zeroth_dimension</span><span class="p">(</span><span class="n">tensor</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">backend</span> <span class="o">=</span> <span class="n">get_backend</span><span class="p">(</span><span class="n">tensor</span><span class="p">)</span>
+
+        <span class="n">hashable_axes_lengths</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">axes_lengths</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>
+        <span class="n">shape</span> <span class="o">=</span> <span class="n">backend</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">tensor</span><span class="p">)</span>
+        <span class="n">recipe</span> <span class="o">=</span> <span class="n">_prepare_transformation_recipe</span><span class="p">(</span><span class="n">pattern</span><span class="p">,</span> <span class="n">reduction</span><span class="p">,</span> <span class="n">axes_names</span><span class="o">=</span><span class="nb">tuple</span><span class="p">(</span><span class="n">axes_lengths</span><span class="p">),</span> <span class="n">ndim</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">shape</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">_apply_recipe</span><span class="p">(</span>
+            <span class="n">backend</span><span class="p">,</span> <span class="n">recipe</span><span class="p">,</span> <span class="n">cast</span><span class="p">(</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">tensor</span><span class="p">),</span> <span class="n">reduction_type</span><span class="o">=</span><span class="n">reduction</span><span class="p">,</span> <span class="n">axes_lengths</span><span class="o">=</span><span class="n">hashable_axes_lengths</span>
+        <span class="p">)</span>
     <span class="k">except</span> <span class="n">EinopsError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
         <span class="n">message</span> <span class="o">=</span> <span class="s1">&#39; Error while processing </span><span class="si">{}</span><span class="s1">-reduction pattern &quot;</span><span class="si">{}</span><span class="s1">&quot;.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">reduction</span><span class="p">,</span> <span class="n">pattern</span><span class="p">)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">tensor</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
-            <span class="n">message</span> <span class="o">+=</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1"> Input tensor shape: </span><span class="si">{}</span><span class="s1">. &#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">get_backend</span><span class="p">(</span><span class="n">tensor</span><span class="p">)</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">tensor</span><span class="p">))</span>
+            <span class="n">message</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2"> Input tensor shape: </span><span class="si">{}</span><span class="s2">. &quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">shape</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">message</span> <span class="o">+=</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1"> Input is list. &#39;</span>
-        <span class="n">message</span> <span class="o">+=</span> <span class="s1">&#39;Additional info: </span><span class="si">{}</span><span class="s1">.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">axes_lengths</span><span class="p">)</span>
-        <span class="k">raise</span> <span class="n">EinopsError</span><span class="p">(</span><span class="n">message</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1"> </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
+            <span class="n">message</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2"> Input is list. &quot;</span>
+        <span class="n">message</span> <span class="o">+=</span> <span class="s2">&quot;Additional info: </span><span class="si">{}</span><span class="s2">.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">axes_lengths</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="n">EinopsError</span><span class="p">(</span><span class="n">message</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2"> </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
 </code></pre></div>
         </details>
     </div>

@@ -261,13 +261,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#recordings-of-talk-at-iclr-2022" class="md-nav__link">
-    Recordings of talk at ICLR 2022
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#contents" class="md-nav__link">
     Contents
   </a>
@@ -292,6 +285,26 @@
   <a href="#api" class="md-nav__link">
     API 
   </a>
+  
+    <nav class="md-nav" aria-label="API ">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#einmix" class="md-nav__link">
+    EinMix
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#layers" class="md-nav__link">
+    Layers
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -693,13 +706,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#recordings-of-talk-at-iclr-2022" class="md-nav__link">
-    Recordings of talk at ICLR 2022
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#contents" class="md-nav__link">
     Contents
   </a>
@@ -724,6 +730,26 @@
   <a href="#api" class="md-nav__link">
     API 
   </a>
+  
+    <nav class="md-nav" aria-label="API ">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#einmix" class="md-nav__link">
+    EinMix
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#layers" class="md-nav__link">
+    Layers
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -852,13 +878,23 @@
 Supports numpy, pytorch, tensorflow, jax, and <a href="#supported-frameworks">others</a>.</p>
 <h2 id="recent-updates">Recent updates:</h2>
 <ul>
+<li>0.7.0rc1: no-hassle <code>torch.compile</code>, support of <a href="https://data-apis.org/array-api/latest/API_specification/index.html">array api standard</a> and more</li>
+<li>10'000: github reports that more than 10k project use einops 🎂</li>
+<li>see how to use einops with <a href="https://github.com/arogozhnikov/einops/wiki/Using-torch.compile-with-einops">torch.compile</a></li>
+<li>einops 0.6.1: paddle backend added</li>
 <li>einops 0.6 introduces <a href="https://github.com/arogozhnikov/einops/blob/master/docs/4-pack-and-unpack.ipynb">packing and unpacking</a></li>
 <li>einops 0.5: einsum is now a part of einops</li>
-<li><a href="https://openreview.net/pdf?id=oapKSVM2bcj">Einops paper</a> is accepted for oral presentation at ICLR 2022 (yes, it worth reading)</li>
+<li><a href="https://openreview.net/pdf?id=oapKSVM2bcj">Einops paper</a> is accepted for oral presentation at ICLR 2022 (yes, it worth reading).
+  Talk recordings are <a href="https://iclr.cc/virtual/2022/oral/6603">available</a></li>
+</ul>
+<details>
+<summary>Previous updates</summary>
+<ul>
 <li>flax and oneflow backend added</li>
 <li>torch.jit.script is supported for pytorch layers</li>
 <li>powerful EinMix added to einops. <a href="https://github.com/arogozhnikov/einops/blob/master/docs/3-einmix-layer.ipynb">Einmix tutorial notebook</a> </li>
 </ul>
+</details>
 <!--<div align="center">
   <img src="http://arogozhnikov.github.io/images/einops/einops_logo_350x350.png" 
   alt="einops package logo" width="250" height="250" />
@@ -875,11 +911,16 @@ Supports numpy, pytorch, tensorflow, jax, and <a href="#supported-frameworks">ot
 <a href="https://twitter.com/nasim_rahaman/status/1216022614755463169">Nasim Rahaman, MILA (Montreal)</a></p>
 </blockquote>
 <p><a href="https://einops.rocks/pages/testimonials/">More testimonials</a></p>
-<h2 id="recordings-of-talk-at-iclr-2022">Recordings of talk at ICLR 2022</h2>
-<p><a href='https://iclr.cc/virtual/2022/oral/6603'>
+<!--
+## Recordings of talk at ICLR 2022
+
+<a href='https://iclr.cc/virtual/2022/oral/6603'>
 <img width="922" alt="Screen Shot 2022-07-03 at 1 00 15 AM" src="https://user-images.githubusercontent.com/6318811/177030789-89d349bf-ef75-4af5-a71f-609896d1c8d9.png">
-</a></p>
-<p>Watch <a href="https://iclr.cc/virtual/2022/oral/6603">a 15-minute talk</a> focused on main problems of standard tensor manipulation methods, and how einops improves this process.</p>
+</a>
+
+Watch [a 15-minute talk](https://iclr.cc/virtual/2022/oral/6603) focused on main problems of standard tensor manipulation methods, and how einops improves this process.
+-->
+
 <h2 id="contents">Contents</h2>
 <ul>
 <li><a href="#Installation">Installation</a></li>
@@ -888,6 +929,7 @@ Supports numpy, pytorch, tensorflow, jax, and <a href="#supported-frameworks">ot
 <li><a href="#API">API micro-reference</a></li>
 <li><a href="#Why-using-einops-notation">Why using einops</a></li>
 <li><a href="#Supported-frameworks">Supported frameworks</a></li>
+<li><a href="#Citing">Citing</a></li>
 <li><a href="https://github.com/arogozhnikov/einops">Repository</a> and <a href="https://github.com/arogozhnikov/einops/discussions">discussions</a></li>
 </ul>
 <h2 id="installation">Installation  <a name="Installation"></a></h2>
@@ -928,20 +970,37 @@ shows those cover stacking, reshape, transposition, squeeze/unsqueeze, repeat, t
 <span class="n">output_tensor</span> <span class="o">=</span> <span class="n">repeat</span><span class="p">(</span><span class="n">input_tensor</span><span class="p">,</span> <span class="s1">&#39;h w -&gt; h w c&#39;</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
 </code></pre></div>
 
-<p>And two corresponding layers (<code>einops</code> keeps a separate version for each framework) with the same API.</p>
+<p>Later additions to the family are <code>pack</code> and <code>unpack</code> functions (better than stack/split/concatenate):</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">einops</span> <span class="kn">import</span> <span class="n">pack</span><span class="p">,</span> <span class="n">unpack</span>
+<span class="c1"># pack and unpack allow reversibly &#39;packing&#39; multiple tensors into one.</span>
+<span class="c1"># Packed tensors may be of different dimensionality:</span>
+<span class="n">packed</span><span class="p">,</span>  <span class="n">ps</span> <span class="o">=</span> <span class="n">pack</span><span class="p">([</span><span class="n">class_token_bc</span><span class="p">,</span> <span class="n">image_tokens_bhwc</span><span class="p">,</span> <span class="n">text_tokens_btc</span><span class="p">],</span> <span class="s1">&#39;b * c&#39;</span><span class="p">)</span>
+<span class="n">class_emb_bc</span><span class="p">,</span> <span class="n">image_emb_bhwc</span><span class="p">,</span> <span class="n">text_emb_btc</span> <span class="o">=</span> <span class="n">unpack</span><span class="p">(</span><span class="n">transformer</span><span class="p">(</span><span class="n">packed</span><span class="p">),</span> <span class="n">ps</span><span class="p">,</span> <span class="s1">&#39;b * c&#39;</span><span class="p">)</span>
+</code></pre></div>
+
+<p>Finally, einops provides einsum with a support of multi-lettered names: </p>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">einops</span> <span class="kn">import</span> <span class="n">einsum</span><span class="p">,</span> <span class="n">pack</span><span class="p">,</span> <span class="n">unpack</span>
+<span class="c1"># einsum is like ... einsum, generic and flexible dot-product </span>
+<span class="c1"># but 1) axes can be multi-lettered  2) pattern goes last 3) works with multiple frameworks</span>
+<span class="n">C</span> <span class="o">=</span> <span class="n">einsum</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="s1">&#39;b t1 head c, b t2 head c -&gt; b head t1 t2&#39;</span><span class="p">)</span>
+</code></pre></div>
+
+<h3 id="einmix">EinMix</h3>
+<p><code>EinMix</code> is a generic linear layer, perfect for MLP Mixers and similar architectures.</p>
+<h3 id="layers">Layers</h3>
+<p>Einops provides layers (<code>einops</code> keeps a separate version for each framework) that reflect corresponding functions</p>
 <div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">einops.layers.torch</span>      <span class="kn">import</span> <span class="n">Rearrange</span><span class="p">,</span> <span class="n">Reduce</span>
 <span class="kn">from</span> <span class="nn">einops.layers.tensorflow</span> <span class="kn">import</span> <span class="n">Rearrange</span><span class="p">,</span> <span class="n">Reduce</span>
 <span class="kn">from</span> <span class="nn">einops.layers.flax</span>       <span class="kn">import</span> <span class="n">Rearrange</span><span class="p">,</span> <span class="n">Reduce</span>
-<span class="kn">from</span> <span class="nn">einops.layers.gluon</span>      <span class="kn">import</span> <span class="n">Rearrange</span><span class="p">,</span> <span class="n">Reduce</span>
+<span class="kn">from</span> <span class="nn">einops.layers.paddle</span>     <span class="kn">import</span> <span class="n">Rearrange</span><span class="p">,</span> <span class="n">Reduce</span>
 <span class="kn">from</span> <span class="nn">einops.layers.keras</span>      <span class="kn">import</span> <span class="n">Rearrange</span><span class="p">,</span> <span class="n">Reduce</span>
 <span class="kn">from</span> <span class="nn">einops.layers.chainer</span>    <span class="kn">import</span> <span class="n">Rearrange</span><span class="p">,</span> <span class="n">Reduce</span>
 </code></pre></div>
 
-<p>Layers behave similarly to operations and have the same parameters 
-(with the exception of the first argument, which is passed during call).</p>
-<p>Example of using layers within a model:</p>
-<div class="codehilite"><pre><span></span><code><span class="c1"># example given for pytorch, but code in other frameworks is almost identical  </span>
-<span class="kn">from</span> <span class="nn">torch.nn</span> <span class="kn">import</span> <span class="n">Sequential</span><span class="p">,</span> <span class="n">Conv2d</span><span class="p">,</span> <span class="n">MaxPool2d</span><span class="p">,</span> <span class="n">Linear</span><span class="p">,</span> <span class="n">ReLU</span>
+<details>
+<summary>Example of using layers within a pytorch model</summary>
+<p>Example given for pytorch, but code in other frameworks is almost identical</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">torch.nn</span> <span class="kn">import</span> <span class="n">Sequential</span><span class="p">,</span> <span class="n">Conv2d</span><span class="p">,</span> <span class="n">MaxPool2d</span><span class="p">,</span> <span class="n">Linear</span><span class="p">,</span> <span class="n">ReLU</span>
 <span class="kn">from</span> <span class="nn">einops.layers.torch</span> <span class="kn">import</span> <span class="n">Rearrange</span>
 
 <span class="n">model</span> <span class="o">=</span> <span class="n">Sequential</span><span class="p">(</span>
@@ -956,21 +1015,9 @@ shows those cover stacking, reshape, transposition, squeeze/unsqueeze, repeat, t
 <span class="p">)</span>
 </code></pre></div>
 
-<p>Later additions to the family are <code>einsum</code>, <code>pack</code> and <code>unpack</code> functions:</p>
-<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">einops</span> <span class="kn">import</span> <span class="n">einsum</span><span class="p">,</span> <span class="n">pack</span><span class="p">,</span> <span class="n">unpack</span>
-<span class="c1"># einsum is like ... einsum, generic and flexible dot-product </span>
-<span class="c1"># but 1) axes can be multi-lettered  2) pattern goes last 3) works with multiple frameworks</span>
-<span class="n">C</span> <span class="o">=</span> <span class="n">einsum</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="s1">&#39;b t1 head c, b t2 head c -&gt; b head t1 t2&#39;</span><span class="p">)</span>
-
-<span class="c1"># pack and unpack allow reversibly &#39;packing&#39; multiple tensors into one.</span>
-<span class="c1"># Packed tensors may be of different dimensionality:</span>
-<span class="n">packed</span><span class="p">,</span>  <span class="n">ps</span> <span class="o">=</span> <span class="n">pack</span><span class="p">([</span><span class="n">class_token_bc</span><span class="p">,</span> <span class="n">image_tokens_bhwc</span><span class="p">,</span> <span class="n">text_tokens_btc</span><span class="p">],</span> <span class="s1">&#39;b * c&#39;</span><span class="p">)</span>
-<span class="n">class_emb_bc</span><span class="p">,</span> <span class="n">image_emb_bhwc</span><span class="p">,</span> <span class="n">text_emb_btc</span> <span class="o">=</span> <span class="n">unpack</span><span class="p">(</span><span class="n">transformer</span><span class="p">(</span><span class="n">packed</span><span class="p">),</span> <span class="n">ps</span><span class="p">,</span> <span class="s1">&#39;b * c&#39;</span><span class="p">)</span>
-<span class="c1"># Pack/Unpack are more convenient than concat and split, see tutorial</span>
-</code></pre></div>
-
-<p>Last, but not the least <code>EinMix</code> layer is available! <br />
-<code>EinMix</code> is a generic linear layer, perfect for MLP Mixers and similar architectures.</p>
+<p>No more flatten needed! </p>
+<p>Additionally, torch users will benefit from layers as those are script-able and compile-able.</p>
+</details>
 <h2 id="naming">Naming <a name="Naming"></a></h2>
 <p><code>einops</code> stands for Einstein-Inspired Notation for operations 
 (though "Einstein operations" is more attractive and easier to remember).</p>
@@ -1035,7 +1082,7 @@ those are all defined in a uniform way. </p>
 
 <p>Suppose <code>x</code>'s shape was <code>(3, 4, 5)</code>, then <code>y</code> has shape ...</p>
 <ul>
-<li>numpy, cupy, chainer, pytorch: <code>(60,)</code></li>
+<li>numpy, pytorch, cupy, chainer: <code>(60,)</code></li>
 <li>keras, tensorflow.layers, gluon: <code>(3, 20)</code></li>
 </ul>
 <p><code>einops</code> works the same way in all frameworks.</p>
@@ -1054,7 +1101,7 @@ those are all defined in a uniform way. </p>
 <span class="o">...</span> <span class="p">(</span><span class="n">etc</span><span class="o">.</span><span class="p">)</span>
 </code></pre></div>
 
-<p>Testimonials provide user's perspective on the same question. </p>
+<p><a href="https://einops.rocks/pages/testimonials/">Testimonials</a> provide users' perspective on the same question. </p>
 <h2 id="supported-frameworks">Supported frameworks <a name="Supported-frameworks"></a></h2>
 <p>Einops works with ...</p>
 <ul>
@@ -1068,9 +1115,9 @@ those are all defined in a uniform way. </p>
 <li><a href="https://github.com/Oneflow-Inc/oneflow">oneflow</a> (experimental)</li>
 <li><a href="https://github.com/google/flax">flax</a> (experimental)</li>
 <li><a href="https://github.com/PaddlePaddle/Paddle">paddle</a> (experimental)</li>
-<li><a href="https://gluon.mxnet.io/">gluon</a> (deprecated)</li>
 </ul>
-<h2 id="citing-einops">Citing einops <a name="Contributing"></a></h2>
+<p>Additionally, starting from einops 0.7.0 einops can be used with any framework that supports <a href="https://data-apis.org/array-api/latest/API_specification/index.html">Python array API standard</a></p>
+<h2 id="citing-einops">Citing einops <a name="Citing"></a></h2>
 <p>Please use the following bibtex record</p>
 <div class="codehilite"><pre><span></span><code>@inproceedings{
     rogozhnikov2022einops,
@@ -1083,7 +1130,7 @@ those are all defined in a uniform way. </p>
 </code></pre></div>
 
 <h2 id="supported-python-versions">Supported python versions</h2>
-<p><code>einops</code> works with python 3.7 or later.</p>
+<p><code>einops</code> works with python 3.8 or later.</p>
 
 
 
