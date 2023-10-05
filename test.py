@@ -35,7 +35,7 @@ def main():
     _executable, *frameworks = sys.argv
     framework_name2installation = {
         "numpy": ["numpy"],
-        "torch": ["torch --index-url https://download.pytorch.org/whl/cpu"],
+        "torch": ["torch --index-url https://download.pytorch.org/whl/cu118"],
         "jax": ["jax[cpu]", "jaxlib", "flax"],
         "tensorflow": ["tensorflow"],
         "chainer": ["chainer"],
